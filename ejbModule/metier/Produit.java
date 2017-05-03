@@ -1,12 +1,14 @@
 package metier;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Produit {
+public class Produit implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -45,6 +47,11 @@ public class Produit {
 
 	public void setPrix(double prix) {
 		this.prix = prix;
+	}
+
+	@Override
+	public String toString() {
+		return "Produit [id=" + id + ", nom=" + nom + ", quantite=" + quantite + ", prix=" + prix + "]";
 	}
 
 }
