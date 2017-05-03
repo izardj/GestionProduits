@@ -39,7 +39,7 @@ public class ProduitEJBImpl implements ProduitRemote, ProduitLocal {
 
 	@Override
 	public void supprimerProduit(Produit p) {
-		em.remove(p);
+		em.remove(em.contains(p) ? p : em.merge(p));
 	}
 
 	@Override
@@ -49,8 +49,7 @@ public class ProduitEJBImpl implements ProduitRemote, ProduitLocal {
 
 	@Override
 	public List<Produit> findAllProduits() {
-		Query q = em.createQuery("SELECT p FROM Produit p WHERE");
-		return q.getResultList();
+		return em.createQuery("SELECT p FROM Produit p").getResultList();
 	}
 
 }
